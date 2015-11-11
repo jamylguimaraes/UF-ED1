@@ -1,16 +1,18 @@
 /**
- * 
+ * Classe que representa um ou mais elementos agrupados
+ * por alguma característica em comum, ou seja, um
+ * conjunto.
+ * Neste caso, os elementos do conjunto estão dispostos
+ * na forma de uma árvore binária. 
  */
 package local.union_find;
 
 /**
- * @author Wesley Alves Torres
+ * @author Wesley Alves Torres 
  *
  */
 public class MySet extends MyTree
-{
-	private Node id;
-	
+{	
 	/**
 	 * Construtor da classe. Inicializa armazenando o valor
 	 * informado e configurando os demais campos como nulo,
@@ -18,15 +20,10 @@ public class MySet extends MyTree
 	 * @param value é o valor que será inicialmente
 	 * armazenado neste Set.
 	 */
-	public MySet( int value )
-	{
-		super( value );
-		
-		this.id = this;
-	}
+	public MySet( int value ) { super( value ); }
 
 	/** @return o identificador deste Set. */
-	public Node getId() { return this.id; }
+	public int getId() { return this.getValue(); }
 	
 	/**
 	 * Verifica se uma chave informada está contida neste Set.
@@ -49,26 +46,18 @@ public class MySet extends MyTree
 	 */
 	private boolean union( MySet setA, MySet setB )
 	{
-		boolean found = setA.find( setB.getId().getValue() );
-		
-		if( found )
+		if( setA.getHeight() > setB.getHeight() )
 		{
-			if( setA.getHeight() > setB.getHeight() )
-			{
-				setA.addNode( setB );
-				setA.id = setB.id;
-				
-				setB = null;
-			}			
-			else
-			{	
-				setB.addNode( this );
-				
-				setA = null;
-			}
+			setA.addNode( setB );
+			setB = setA;
+		}			
+		else
+		{	
+			setB.addNode( this );
+			setA = setB;
 		}
 		
-		return found;
+		return setA == setB;
 	}
 	
 	/**
