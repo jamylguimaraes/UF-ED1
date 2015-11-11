@@ -2,17 +2,24 @@ import java.util.Scanner;
 
 public class Labirinto {
 	private int N; // Dimensao do labirinto
-	private boolean[][] norte; // para verificacao se ha uma celula ao norte
-	private boolean[][] leste;
-	private boolean[][] sul;
-	private boolean[][] oeste;
-	private boolean[][] visitado;
-	private boolean completo = false;
-	static int inicio1;
-	static int inicio2;
-	static int fim1;
-	static int fim2;
+	private boolean[][] norte; // Matriz norte
+	private boolean[][] leste; // Matriz leste
+	private boolean[][] sul;   // Matriz sul
+	private boolean[][] oeste; // Matriz oeste
+	private boolean[][] visitado; // Matriz de Visitados
+	private boolean completo = false;  // Variavel que indica o status
+	static int inicio1;             // Valor no eixo X do ponto inicial
+	static int inicio2;				// Valor no eixo Y do ponto inicial
+	static int fim1;				// Valor no eixo X do ponto final
+	static int fim2;				// Valor no eixo Y do ponto final
 
+	/*
+	 * Metodo Construtor
+	 * Recebe como parametro o tamanho em int do Labirinto
+	 * Desenha no eixo X (0, N+2)
+	 * Desenha no eixo Y (0, N+2)
+	 * Chama o metodo inicializar e o criar 
+	 */
 	public Labirinto(int N) {
 		this.N = N;
 		StdDraw.setXscale(0, N + 2);
@@ -21,15 +28,18 @@ public class Labirinto {
 		criar();
 	}
 
+	/*
+	 * Metodo Inicializar
+	 */
 	private void inicializar() {
-		// inicializa as celulas como ja visitadas
+		// inicializa as celulas do eixo Y e X como ja visitadas
 		visitado = new boolean[N + 2][N + 2];
 		for (int x = 0; x < N + 2; x++)
 			visitado[x][0] = visitado[x][N + 1] = true;
 		for (int y = 0; y < N + 2; y++)
 			visitado[0][y] = visitado[N + 1][y] = true;
 
-		// inicializa as paredes como true
+		// Realiza dois for no eixo X e Y ao norte, leste, sul e oeste e seta como true
 		norte = new boolean[N + 2][N + 2];
 		leste = new boolean[N + 2][N + 2];
 		sul = new boolean[N + 2][N + 2];
@@ -39,7 +49,10 @@ public class Labirinto {
 				norte[x][y] = leste[x][y] = sul[x][y] = oeste[x][y] = true;
 	}
 
-	// gera o labirinto
+	/*
+	 * Metodo criar recebe como parametros coordenadas do eixo x e y 
+	 * Marca como visitados
+	 */
 	private void criar(int x, int y) {
 		visitado[x][y] = true;
 		double r;
@@ -71,7 +84,9 @@ public class Labirinto {
 		}
 	}
 
-	// gera o labirinto , comecando sua criacao a partir da esquerda
+	/*
+	 * SobreCarga do Metodo criar, passa como parametros X = 1 e Y = 1 
+	 */
 	private void criar() {
 		criar(1, 1);
 
