@@ -51,7 +51,7 @@ public class MySet extends MyTree
 	{
 		boolean found = setA.find( setB.getId().getValue() );
 		
-		if( found )
+		if( !found )
 		{
 			if( setA.getHeight() > setB.getHeight() )
 			{
