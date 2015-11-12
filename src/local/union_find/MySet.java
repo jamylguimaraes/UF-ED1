@@ -23,7 +23,7 @@ public class MySet extends MyTree
 	public MySet( int value ) { super( value ); }
 
 	/** @return o identificador deste Set. */
-	public int getId() { return this.getValue(); }
+	public double getId() { return this.getValue(); }
 	
 	/**
 	 * Verifica se uma chave informada está contida neste Set.
