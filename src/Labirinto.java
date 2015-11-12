@@ -39,7 +39,7 @@ public class Labirinto {
 		for (int y = 0; y < N + 2; y++)
 			visitado[0][y] = visitado[N + 1][y] = true;
 
-		// Realiza dois for no eixo X e Y ao norte, leste, sul e oeste e seta como true
+		// Realiza dois laços no eixo X e Y ao norte, leste, sul e oeste e seta como true
 		norte = new boolean[N + 2][N + 2];
 		leste = new boolean[N + 2][N + 2];
 		sul = new boolean[N + 2][N + 2];
@@ -126,8 +126,8 @@ public class Labirinto {
 	}
 
 	/*
-	 * Resolve o labirinto , comecando pelo parametro da posicao inicial passado
-	 * no main
+	 * Método executa dois laços para setar X,Y visitados como false, 
+	 * completo recebe false, chama sobrecarga do método resolver.
 	 */
 
 	public void resolver() {

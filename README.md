@@ -12,4 +12,5 @@ Modificações e Novidades serão colocadas no readme.
 	- http://webserver2.tecgraf.puc-rio.br/eda/slides/EDA_07_Particao.pdf
 	- http://www.ic.unicamp.br/~zanoni/mo637/aulas/conjuntosDisjuntos.pdf
 	- http://www.inf.ufrgs.br/~tsrodrigues/utilidades/cormem.pdf
+	- https://www.ime.usp.br/~cris/aulas/12_1_6711/slides/aula18.pdf
 	
