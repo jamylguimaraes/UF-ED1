@@ -9,7 +9,7 @@ package local.union_find;
  */
 class Node
 {
-	private int value;
+	private double value;
 	private Node left, right;
 
 	/**
@@ -43,7 +43,7 @@ class Node
 	 * Retorna o valor inteiro armazenado neste nó.
 	 * @return value é o valor armazenado.
 	 */
-	protected int getValue() { return this.value; }
+	protected double getValue() { return this.value; }
 
 	/**
 	 * "Posiciona" um nó informado à esquerda deste nó.
@@ -61,5 +61,5 @@ class Node
 	 * Armazena um valor informado dentro deste nó.
 	 * @param value é o valor que se deseja armazenar.
 	 */
-	protected void setValue( int newValue ) { this.value = newValue; }
+	protected void setValue( double newValue ) { this.value = newValue; }
 }
