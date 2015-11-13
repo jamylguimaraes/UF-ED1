@@ -10,7 +10,7 @@ public class Labrinto2
 	{
 		Scanner scan = new Scanner( System.in );
 
-		LinkedList south, east, north; // west;
+		LinkedList south, east, north;
 
 		double r;
 		
@@ -92,5 +92,4 @@ public class Labrinto2
 		StdDraw.show( 10000 );
 		scan.close();
 	}
-
 }
