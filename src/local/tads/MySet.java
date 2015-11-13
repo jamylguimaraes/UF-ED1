@@ -5,7 +5,7 @@
  * Neste caso, os elementos do conjunto estão dispostos
  * na forma de uma árvore binária. 
  */
-package local.union_find;
+package local.tads;
 
 /**
  * @author Wesley Alves Torres 

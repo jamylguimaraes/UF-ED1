@@ -1,4 +1,4 @@
-package local.union_find;
+package local.tads;
 
 class MyTree extends Node
 {

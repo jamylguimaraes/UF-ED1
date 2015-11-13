@@ -1,7 +1,7 @@
 /**
  * 
  */
-package local.union_find;
+package local.tads;
 
 /**
  * @author Wesley Alves Torres
