@@ -1,11 +1,11 @@
 package local.tads;
 
-public class LinkedList
+public class SimpleLinkedList
 {
 	private SimpleSet element;
-	private LinkedList next;
+	private SimpleLinkedList next;
 	
-	public LinkedList( SimpleSet firstElement )
+	public SimpleLinkedList( SimpleSet firstElement )
 	{
 		this.element = firstElement;
 		this.next = null;
@@ -19,7 +19,7 @@ public class LinkedList
 	/**
 	 * @return the next
 	 */
-	public LinkedList getNext() { return this.next; }
+	public SimpleLinkedList getNext() { return this.next; }
 
 	/**
 	 * @param newValue the value to set
@@ -29,9 +29,9 @@ public class LinkedList
 	/**
 	 * @param newElement the next to set
 	 */
-	public void addElement( LinkedList newElement ) 
+	public void addElement( SimpleLinkedList newElement ) 
 	{ 
-		LinkedList head = this;
+		SimpleLinkedList head = this;
 
 		while( head.next != null )
 			head = head.next;
