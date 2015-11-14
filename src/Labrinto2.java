@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import local.tads.LinkedList;
+import local.tads.SimpleLinkedList;
 import local.tads.SimpleSet;
 
 public class Labrinto2
@@ -10,30 +10,27 @@ public class Labrinto2
 	{
 		Scanner scan = new Scanner( System.in );
 
-		LinkedList south, east, north;
+		SimpleLinkedList south, yList;
 
 		double r;
 		
 		System.out.println("Digite a dimensao de sua Matriz");
 		int size = scan.nextInt();
 
-		south = new LinkedList( new SimpleSet( 1 ) );
-		east = new LinkedList( new SimpleSet( 1 ) );
-		north = new LinkedList( new SimpleSet( 1 ) );
+		south = new SimpleLinkedList( new SimpleSet( 1 ) );
+		yList = new SimpleLinkedList( new SimpleSet( 1 ) );
 		
-		LinkedList eHead = east;
-		LinkedList sHead;
-		LinkedList nHead;
+		SimpleLinkedList xSet = yList;
+		SimpleLinkedList sHead;
 		
 		for( int i = 2; i < ( size + 1 ); i++ )
 		{
-			south.addElement( new LinkedList( new SimpleSet( i ) ) );
-			east.addElement( new LinkedList( new SimpleSet( i ) ) );
-			north.addElement( new LinkedList( new SimpleSet( i ) ) );
+			south.addElement( new SimpleLinkedList( new SimpleSet( i ) ) );
+			yList.addElement( new SimpleLinkedList( new SimpleSet( i ) ) );
 		}
 		
-		eHead = east;
-		while( eHead != null )
+		xSet = yList;
+		while( xSet != null )
 		{
 			do
 			{
@@ -44,20 +41,9 @@ public class Labrinto2
 			while( !sHead.getElement().find( ( int )r ) )
 				sHead = sHead.getNext();
 			
-			eHead.getElement().union( sHead.getElement() );
+			xSet.getElement().union( sHead.getElement() );
 			
-			do
-			{
-				r = ( Math.random() * 10 ) + 1;
-			} while( r > ( size + 1 ) );
-			
-			nHead = north;
-			while( !nHead.getElement().find( ( int )r ) )
-				nHead = nHead.getNext();
-			
-			sHead.getElement().union( nHead.getElement() );
-			
-			eHead = eHead.getNext();
+			xSet = xSet.getNext();
 		}
 		
 		StdDraw.setXscale( 0, size );
@@ -70,14 +56,14 @@ public class Labrinto2
 		StdDraw.line(size, size, size, 1);
 		StdDraw.line(size, 1, 1, 1);
 		
-		eHead = east;
-		while( eHead != null )
+		xSet = yList;
+		while( xSet != null )
 		{
 			for( int y = 1; y < size; y++ )
 			{
-				double x = eHead.getElement().getValue();
+				double x = xSet.getElement().getValue();
 				
-				if( !eHead.getElement().find( y ) )
+				if( !xSet.getElement().find( y ) )
 				{
 					StdDraw.line( x, y, x, ( y + 1 ) );
 					
@@ -86,10 +72,10 @@ public class Labrinto2
 				}
 			}
 			
-			eHead = eHead.getNext();
+			xSet = xSet.getNext();
 		}
 
 		StdDraw.show( 10000 );
 		scan.close();
-	}
+	} 
 }
