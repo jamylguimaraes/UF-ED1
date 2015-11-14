@@ -1,6 +1,11 @@
 # UF-ED1
 Repositório do trabalho Union-Find - ED-1
 
+---------------------
+Modifique o código disponibilizado na página da disciplina para permitir que o Labirinto seja gerado a partir de uma TAD Union-Find. Operações ânions sucessivas devem possibilitar a geração, enquanto operações find podem ser úteis para identificar se um dado Labirinto gerado, considerando pontos de entrada e saída, possui solução. 
+Prazo de Entrega: 15/11/2015 23:59:59
+--------------------- 
+
 Modificações e Novidades serão colocadas no readme.
 * To do 
 	- CC - Em Progresso (Jamyl)
