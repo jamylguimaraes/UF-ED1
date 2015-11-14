@@ -26,25 +26,26 @@ public class SimpleSet
 	 */
 	public void setValue( double newValue ) { this.value = newValue; }
 	
-	private SimpleSet find( SimpleSet source, double key )
+	public boolean find( double key )
 	{
-		if( source.value == key )
-			return source;
+		if( this.value == key )
+			return true;
 		
-		if( source.id != source )
-			return source.find( source.id, key );
+		if( this.id == this )
+			return false;
 		
-		return null;
+		return this.id.find( key );
 	}
 	
-	public boolean find( double key ) { return this.find( this, key ) != null; }
-
 	public SimpleSet union( SimpleSet otherSet )
 	{
+		if( this.find( otherSet.value ) )
+			return null;
+		
 		if( this.id != this )
 			return this.id.union( otherSet );
 		
-		this.id = otherSet;
+		this.id = otherSet.id;
 		
 		return this.id;
 	}
