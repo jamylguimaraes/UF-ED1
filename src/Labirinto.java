@@ -278,8 +278,6 @@ public class Labirinto {
 			
 			setOfBegins = setOfBegins.getNext();
 		}
-
-		//StdDraw.show( 10000 );
 	}
 	
 	public static void drawMaze( int size ){ drawMaze( beginPoints, endPoints, size ); }
