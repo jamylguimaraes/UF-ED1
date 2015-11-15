@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import local.tads.SimpleLinkedList;
 import local.tads.SimpleSet;
+import local.tads.LinkedSet;
 
 public class Labirinto {
 	private int N; // Dimensao do labirinto
@@ -18,6 +19,7 @@ public class Labirinto {
 
 //=============================================================================================================
 	private static SimpleLinkedList beginPoints, endPoints;
+	private LinkedSet visitados = new LinkedSet();
 //=============================================================================================================
 	
 	/*
@@ -31,6 +33,14 @@ public class Labirinto {
 		this.N = N;
 		StdDraw.setXscale(0, N + 2);
 		StdDraw.setYscale(0, N + 2);
+		
+		double random;
+		do
+		{
+			random = ( int )( Math.random() * 100 ) + 1;
+		} while( random > ( N - 1 ) );
+		
+		visitados.makeSet( ( int )random );
 		inicializar();
 		criar();
 	}
@@ -61,35 +71,48 @@ public class Labirinto {
 	 * Marca como visitados
 	 */
 	private void criar(int x, int y) {
-		visitado[x][y] = true;
+		//visitado[x][y] = true;
 		double r;
 		// enquanto houver um vizinho que nao foi visitado
-		while (!visitado[x][y + 1] || !visitado[x + 1][y]
-				|| !visitado[x][y - 1] || !visitado[x - 1][y]) {
-
+		//while (!visitado[x][y + 1] || !visitado[x + 1][y]
+		//		|| !visitado[x][y - 1] || !visitado[x - 1][y]) {
+		
+		//while( !( visitados.find( x + 1 ) && !visitados.find( y + 1 )
+			//	&& !visitados.find( x - 1 ) && !visitados.find( y - 1 ) ) ) {
+		//while(  ) {
 			// pega o vizinho aleatoriamente
-			while (true) {
+			while ( ( x > 0 && x < ( N - 1 ) ) && (  y > 0 &&  y < ( N - 1 ) ) ) {
 				r = Math.random();
-				if (r < 0.25 && !visitado[x][y + 1]) {
-					norte[x][y] = sul[x][y + 1] = false;
+				//if (r < 0.25 && !visitado[x][y + 1]) {
+					//norte[x][y] = sul[x][y + 1] = false;
+				if (r < 0.25 && !visitados.find( y + 1 ) ) {
+					visitados.union( new LinkedSet().makeSet( y + 1 ) );
 					criar(x, y + 1);
 					break;
-				} else if (r >= 0.25 && r < 0.50 && !visitado[x + 1][y]) {
-					leste[x][y] = oeste[x + 1][y] = false;
+				//} else if (r >= 0.25 && r < 0.50 && !visitado[x + 1][y]) {
+					//leste[x][y] = oeste[x + 1][y] = false;
+				} else if (r >= 0.25 && r < 0.50 && !visitados.find( x + 1 )) {
+					visitados.union( new LinkedSet().makeSet( y + 1 ) );
 					criar(x + 1, y);
 					break;
-				} else if (r >= 0.5 && r < 0.75 && !visitado[x][y - 1]) {
-					sul[x][y] = norte[x][y - 1] = false;
+				//} else if (r >= 0.5 && r < 0.75 && !visitado[x][y - 1]) {
+					//sul[x][y] = norte[x][y - 1] = false;
+				} else if (r >= 0.5 && r < 0.75 && !visitados.find( y - 1 ) ) {
+					visitados.union( new LinkedSet().makeSet( y + 1 ) );
 					criar(x, y - 1);
 					break;
-				} else if (r >= 0.75 && r < 1.00 && !visitado[x - 1][y]) {
-					oeste[x][y] = leste[x - 1][y] = false;
+				//} else if (r >= 0.75 && r < 1.00 && !visitado[x - 1][y]) {
+					//oeste[x][y] = leste[x - 1][y] = false;
+				} else if (r >= 0.75 && r < 1.00 && !visitados.find( x - 1 ) ) {
+					visitados.union( new LinkedSet().makeSet( y + 1 ) );
 					criar(x - 1, y);
 					break;
 				}
 			}
+			return;
 		}
-	}
+		//return;
+	//}
 
 	/*
 	 * SobreCarga do Metodo criar, passa como parametros X = 1 e Y = 1 
@@ -154,6 +177,7 @@ public class Labirinto {
 		StdDraw.setPenColor(StdDraw.BLACK);
 		for (int x = 1; x <= N; x++) {
 			for (int y = 1; y <= N; y++) {
+				/*
 				if (sul[x][y])
 					StdDraw.line(x, y, x + 1, y);
 				if (norte[x][y])
@@ -162,9 +186,33 @@ public class Labirinto {
 					StdDraw.line(x, y, x, y + 1);
 				if (leste[x][y])
 					StdDraw.line(x + 1, y, x + 1, y + 1);
+				*/
+				if( !visitados.find( x + 1 ) )
+				{
+					StdDraw.line(x, y, x + 1, y);
+					StdDraw.show(0);
+				}
+				
+				if( !visitados.find( x - 1 ) )
+				{
+					StdDraw.line(x, y, x - 1, y);
+					StdDraw.show(0);
+				}
+				
+				if( !visitados.find( y + 1 ) )
+				{
+					StdDraw.line(x, y, x, y + 1);
+					StdDraw.show(0);
+				}
+				
+				if( !visitados.find( y - 1 ) )
+				{
+					StdDraw.line(x, y, x, y - 1);
+					StdDraw.show(20);
+				}
 			}
 		}
-		StdDraw.show(1000);
+		//StdDraw.show(1000);
 	}
 
 	public static void main(String[] args) {
@@ -199,10 +247,10 @@ public class Labirinto {
 
 		Labirinto Labirinto = new Labirinto(N);
 		StdDraw.show(0);
-		//Labirinto.desenhe();
-		beginPoints = populateList( N );	// Conjunto dos pontos onde cada linha começa a ser desenhada
-		endPoints = populateList( N );		// Conjunto dos pontos onde cada linha termina
-		Labirinto.drawMaze( N );			// Método que desenha um labirinto de tamanha N * N
+		Labirinto.desenhe();
+		//beginPoints = populateList( N );	// Conjunto dos pontos onde cada linha começa a ser desenhada
+		//endPoints = populateList( N );		// Conjunto dos pontos onde cada linha termina
+		//Labirinto.drawMaze( N );			// Método que desenha um labirinto de tamanha N * N
 		Labirinto.resolver();
 	}
 
