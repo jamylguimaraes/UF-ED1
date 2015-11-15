@@ -200,15 +200,22 @@ public class Labirinto {
 		Labirinto Labirinto = new Labirinto(N);
 		StdDraw.show(0);
 		//Labirinto.desenhe();
-		beginPoints = populateList( N );
-		endPoints = populateList( N );
-		Labirinto.drawMaze( N );
+		beginPoints = populateList( N );	// Conjunto dos pontos onde cada linha começa a ser desenhada
+		endPoints = populateList( N );		// Conjunto dos pontos onde cada linha termina
+		Labirinto.drawMaze( N );			// Método que desenha um labirinto de tamanha N * N
 		Labirinto.resolver();
 	}
 
 //====================================================================================================================
 //====================================================================================================================
 
+	/**
+	 * Fornece uma lista simplesmente encadeada com pares ordenados,
+	 * sendo o primeiro valor de cada par inserido de forma sequencial
+	 * e o segundo escolhido aleatoriamente.
+	 * @param size é a quantidade de pares que a lista deve ter.
+	 * @return uma SimpleLinkedList com size nós.
+	 */
 	private static SimpleLinkedList populateList( int size )
 	{
 		SimpleLinkedList localList  = new SimpleLinkedList( new SimpleSet( 1 ) );
@@ -232,6 +239,12 @@ public class Labirinto {
 		return localList;
 	}
 	
+	/**
+	 * Desenha um labirinto.
+	 * @param setOfBegins é o conjunto dos pontos possíveis para cada começo de linha. 
+	 * @param setOfEnds é o conjunto dos pontos possíveis para cada final de linha.
+	 * @param size é o tamanho que cada dimensão externa do labirinto deve ter.
+	 */
 	private static void drawMaze( SimpleLinkedList setOfBegins, SimpleLinkedList setOfEnds, int size )
 	{
 		
@@ -241,16 +254,16 @@ public class Labirinto {
 		StdDraw.setPenColor( StdDraw.BLACK );
 		
 		StdDraw.line(1, 1, 1, size);
-		StdDraw.line(1, size, size, size);
+		StdDraw.line(1, size, size, size);	// Desenha as paredes externas do labirinto.
 		StdDraw.line(size, size, size, 1);
 		StdDraw.line(size, 1, 1, 1);
 		
 		while( setOfBegins != null )
 		{
-			double x1 = setOfBegins.getElement().getId().getValue();
-			double y1 = setOfBegins.getElement().getValue();
+			double x1 = setOfBegins.getElement().getId().getValue(); // x1 é sequencial
+			double y1 = setOfBegins.getElement().getValue();		 // y1 é aleatório
 			
-			SimpleLinkedList yPoint = setOfEnds;
+			SimpleLinkedList yPoint = setOfEnds;	// Ponteiro que percorre a lista conforme necessário
 			while( !yPoint.getElement().find( x1 ) )
 			{
 				double y2 = yPoint.getElement().getId().getValue();
