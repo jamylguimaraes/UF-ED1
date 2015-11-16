@@ -1,3 +1,5 @@
+/* Grupo - Wesley - Robson - Jamyl */
+
 package local.tads;
 
 class NodeSet

@@ -1,3 +1,5 @@
+/* Grupo - Wesley - Robson - Jamyl */
+
 package local.tads;
 
 public class LinkedSet extends NodeSet
